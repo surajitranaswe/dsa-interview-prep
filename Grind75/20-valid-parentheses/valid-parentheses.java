@@ -11,7 +11,7 @@ class Solution {
         for (int i = 0; i < n; i++) { // TC : O(n)
             char ch = s.charAt(i);    // TC : O(1)
             if (isOpenBracket(ch)) {
-                deque.offerFirst(ch);
+                deque.push(ch);
             } else {
                 if (deque.isEmpty()) {
                     /**
@@ -21,9 +21,9 @@ class Solution {
                      */
                     return false;
                 }
-                char last = deque.peekFirst();
+                char last = deque.peek();
                 if (last == getOpenBracketForClosed(ch)) { // TC : O(1)
-                    deque.pollFirst();
+                    deque.pop();
                 } else {
                     return false;
                 }
