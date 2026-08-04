@@ -10,8 +10,8 @@ class Solution {
         int min = prices[0];
         int maxProfit = 0;
         for (int i = 1; i < n; i++) { // TC : O(n)
-            int currentProfit = prices[i] - min;
-            maxProfit = Math.max(maxProfit, currentProfit);
+            // compare and store the maximum profit with profit made at index 'i'
+            maxProfit = Math.max(maxProfit, prices[i] - min);
             // we will carry the minimum encountered value for next day
             min = Math.min(min, prices[i]);
         }
