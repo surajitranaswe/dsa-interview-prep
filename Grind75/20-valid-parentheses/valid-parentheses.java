@@ -1,11 +1,44 @@
 class Solution {
     /**
-     * Approach : Using Stack + String Simulation Approach
+     * Approach II : Using Deque + String Simulation Approach
      *
      * TC : O(n)
      * SC : O(n)
      */
     public boolean isValid(String s) {
+        int n = s.length();
+        Deque<Character> deque = new ArrayDeque<>(); // SC : O(n)
+        for (int i = 0; i < n; i++) { // TC : O(n)
+            char ch = s.charAt(i);    // TC : O(1)
+            if (isOpenBracket(ch)) {
+                deque.offerFirst(ch);
+            } else {
+                if (deque.isEmpty()) {
+                    /**
+                     * if close bracket appears before 
+                     * any open brackets then String 's'
+                     * will always be invalid
+                     */
+                    return false;
+                }
+                char last = deque.peekFirst();
+                if (last == getOpenBracketForClosed(ch)) { // TC : O(1)
+                    deque.pollFirst();
+                } else {
+                    return false;
+                }
+            }
+        }
+        return deque.isEmpty();
+    }
+
+    /**
+     * Approach I : Using Stack + String Simulation Approach
+     *
+     * TC : O(n)
+     * SC : O(n)
+     */
+    public boolean isValidUsingStack(String s) {
         int n = s.length();
         Stack<Character> st = new Stack<>(); // SC : O(n)
         for (int i = 0; i < n; i++) { // TC : O(n)
